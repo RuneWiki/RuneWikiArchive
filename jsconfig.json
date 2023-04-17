@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "#cache/*": [
+                "src/cache/*"
+            ],
+            "#config/*": [
+                "src/cache/config/*"
+            ],
+            "#formats/*": [
+                "src/formats/*"
+            ],
+            "#util/*": [
+                "src/util/*"
+            ]
+        }
+    },
+    "include": [
+        "./src",
+        "./tools"
+    ]
+}

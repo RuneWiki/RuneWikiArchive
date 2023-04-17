@@ -1,0 +1,33 @@
+{
+  "name": "rs2-server",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dumpCache": "node tools/archive/DumpCache.js",
+    "packCache": "node tools/archive/PackCache.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data/*",
+      "dump/*"
+    ]
+  },
+  "imports": {
+    "#cache/*": "./src/cache/*",
+    "#config/*": "./src/cache/config/*",
+    "#formats/*": "./src/formats/*",
+    "#util/*": "./src/util/*"
+  },
+  "dependencies": {
+    "@jimp/jpeg": "^0.16.2",
+    "@jimp/png": "^0.16.2",
+    "axios": "^1.2.2",
+    "bz2": "^1.0.1",
+    "cheerio": "^1.0.0-rc.12",
+    "compressjs": "^1.0.3",
+    "crc-32": "^1.2.2",
+    "fast-csv": "^4.3.6",
+    "jimp": "^0.16.2"
+  }
+}

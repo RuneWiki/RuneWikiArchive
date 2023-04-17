@@ -1,0 +1,14 @@
+node_modules/
+.vscode/
+.vs/
+
+/dump/
+/data/cache/maps/
+/data/cache/raw/
+/data/src/
+/data/config/
+/data/players/
+/public/
+
+/.env
+package-lock.json
