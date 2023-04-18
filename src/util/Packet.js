@@ -192,7 +192,7 @@ export default class Packet {
     gjstr() {
         let start = this.pos;
         while (this.data[this.pos++] !== 10) {}
-        return this.data.slice(start, this.pos - 1).toString();
+        return Buffer.from(this.data.slice(start, this.pos - 1)).toString();
     }
 
     // 0 to 32767
