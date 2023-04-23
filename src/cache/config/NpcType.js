@@ -26,8 +26,18 @@ export default class NpcType {
     opcode92 = -1;
     visonmap = true;
     vislevel = -1;
-    resizex = 128;
-    resizez = 128;
+    resizew = 128;
+    resizeh = 128;
+    //
+    drawpriority = false;
+    ambient = 0;
+    contrast = 0;
+    headicon = -1; // not an official name
+    turnspeed = 32;
+    multivarbit = -1;
+    multivar = -1;
+    multinpc = [];
+    active = true;
 
     // read dat/idx from config archive
     static unpack(dat, idx, preload = false) {
@@ -222,9 +232,42 @@ export default class NpcType {
             } else if (opcode == 95) {
                 this.vislevel = dat.readWord();
             } else if (opcode == 97) {
-                this.resizex = dat.readWord();
+                this.resizew = dat.readWord();
             } else if (opcode == 98) {
-                this.resizez = dat.readWord();
+                this.resizeh = dat.readWord();
+            } else if (opcode == 99) {
+                this.drawpriority = true;
+            } else if (opcode == 100) {
+                this.ambient = dat.readByte();
+            } else if (opcode == 101) {
+                this.contrast = dat.readByte();
+            } else if (opcode == 102) {
+                this.headicon = dat.readWord();
+            } else if (opcode == 103) {
+                this.turnspeed = dat.readWord();
+            } else if (opcode == 106) {
+                this.multivarbit = dat.readWord();
+                if (this.multivarbit == 65535) {
+                    this.multivarbit = -1;
+                }
+
+                this.multivar = dat.readWord();
+                if (this.multivar == 65535) {
+                    this.multivar = -1;
+                }
+
+                this.multinpc = [];
+
+                let count = dat.readByte();
+                for (let i = 0; i <= count; i++) {
+                    this.multinpc[i] = dat.readWord();
+
+                    if (this.multinpc[i] == 65535) {
+                        this.multinpc[i] = -1;
+                    }
+                }
+            } else if (opcode == 107) {
+                this.active = false;
             } else {
                 console.error('Unknown NpcType opcode:', opcode);
             }
@@ -330,14 +373,14 @@ export default class NpcType {
             dat.writeWord(this.vislevel);
         }
 
-        if (this.resizex != 128) {
+        if (this.resizew != 128) {
             dat.writeByte(97);
-            dat.writeWord(this.resizex);
+            dat.writeWord(this.resizew);
         }
 
-        if (this.resizez != 128) {
+        if (this.resizeh != 128) {
             dat.writeByte(98);
-            dat.writeWord(this.resizez);
+            dat.writeWord(this.resizeh);
         }
 
         dat.writeByte(0);
@@ -387,12 +430,12 @@ export default class NpcType {
             config += `size=${this.size}\n`;
         }
 
-        if (this.resizex != 128) {
-            config += `resizex=${this.resizex}\n`;
+        if (this.resizew != 128) {
+            config += `resizew=${this.resizew}\n`;
         }
 
-        if (this.resizez != 128) {
-            config += `resizez=${this.resizez}\n`;
+        if (this.resizeh != 128) {
+            config += `resizeh=${this.resizeh}\n`;
         }
 
         for (let i = 0; i < this.recol_s.length; ++i) {
@@ -414,6 +457,48 @@ export default class NpcType {
 
         if (!this.visonmap) {
             config += `visonmap=no\n`;
+        }
+
+        if (this.drawpriority) {
+            config += `drawpriority=yes\n`;
+        }
+
+        if (this.ambient) {
+            config += `ambient=${this.ambient}\n`;
+        }
+
+        if (this.contrast) {
+            config += `contrast=${this.contrast}\n`;
+        }
+
+        if (this.headicon != -1) {
+            config += `headicon=${this.headicon}\n`;
+        }
+
+        if (this.turnspeed !== 32) {
+            config += `turnspeed=${this.turnspeed}\n`;
+        }
+
+        if (this.multivarbit !== -1 || this.multivar !== -1) {
+            if (this.multivarbit != -1) {
+                config += `multivar=varbit_${this.multivarbit}\n`;
+            }
+
+            if (this.multivar != -1) {
+                config += `multivar=var_${this.multivar}\n`;
+            }
+
+            for (let i = 0; i < this.multinpc.length; i++) {
+                if (this.multinpc[i] == -1) {
+                    continue;
+                }
+
+                config += `multinpc=${i},npc_${this.multinpc[i]}\n`;
+            }
+        }
+
+        if (!this.active) {
+            config += `active=no\n`;
         }
 
         return config;

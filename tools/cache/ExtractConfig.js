@@ -15,14 +15,14 @@ import { FileStore } from '#formats/FileStore.js';
 
 fs.mkdirSync('dump/config', { recursive: true });
 
-let models = FileArchive.fromFile('data/cache/models');
+// let models = FileArchive.fromFile('data/cache/models');
 // SequenceBase.unpack(models); // needed for SequenceFrame
 // SequenceFrame.unpack(models); // needed for SequenceType
 
-let cache = new FileStore('dump/packed/337');
+let cache = new FileStore('dump/packed/377');
 let config = new FileArchive(cache.read(0, 2, false));
 
-// let config = FileArchive.fromFile('data/cache/config');
+// let config = FileArchive.fromFile('data/cache/225/config');
 
 FloorType.unpack(config.read('flo.dat'), config.read('flo.idx'));
 IdentityKitType.unpack(config.read('idk.dat'), config.read('idk.idx'));
@@ -75,7 +75,7 @@ fs.writeFileSync('dump/config/loc.def', LocationType.toJagConfig());
 
 //     fs.writeFileSync(`dump/config/npc/${i}.json`, JSON.stringify(npc, null, 2));
 // }
-// fs.writeFileSync('dump/config/npc.def', NpcType.toJagConfig());
+fs.writeFileSync('dump/config/npc.def', NpcType.toJagConfig());
 
 // fs.mkdirSync('dump/config/obj', { recursive: true });
 // for (let i = 0; i < ObjectType.count; i++) {
@@ -86,7 +86,7 @@ fs.writeFileSync('dump/config/loc.def', LocationType.toJagConfig());
 
 //     fs.writeFileSync(`dump/config/obj/${i}.json`, JSON.stringify(obj, null, 2));
 // }
-// fs.writeFileSync('dump/config/obj.def', ObjectType.toJagConfig());
+fs.writeFileSync('dump/config/obj.def', ObjectType.toJagConfig());
 
 // fs.mkdirSync('dump/config/seq', { recursive: true });
 // for (let i = 0; i < SequenceType.count; i++) {

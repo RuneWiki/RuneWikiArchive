@@ -16,6 +16,7 @@
   "imports": {
     "#cache/*": "./src/cache/*",
     "#config/*": "./src/cache/config/*",
+    "#enum/*": "./src/enum/*",
     "#formats/*": "./src/formats/*",
     "#util/*": "./src/util/*"
   },

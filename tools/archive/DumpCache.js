@@ -4,6 +4,10 @@ import fs from 'fs';
 
 const INDEX_NAMES = ['archives', 'models', 'anims', 'midis', 'maps'];
 
+for (let i = 0; i < INDEX_NAMES.length; ++i) {
+    fs.mkdirSync(`dump/cache/${INDEX_NAMES[i]}`, { recursive: true });
+}
+
 const revisions = fs.readdirSync('dump/cache/source');
 revisions.forEach(rev => {
     console.log(rev);

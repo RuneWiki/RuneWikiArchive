@@ -41,6 +41,13 @@ export default class ObjectType {
     certtemplate = -1;
     countobj = [];
     countco = [];
+    //
+    resizex = 128;
+    resizey = 128;
+    resizez = 128;
+    ambient = 0;
+    contrast = 0;
+    team = 0;
 
     static unpack(dat, idx, preload = false) {
         ObjectType.dat = dat;
@@ -262,6 +269,18 @@ export default class ObjectType {
             } else if (opcode >= 100 && opcode < 110) {
                 this.countobj[opcode - 100] = dat.readWord();
                 this.countco[opcode - 100] = dat.readWord();
+            } else if (opcode == 110) {
+                this.resizex = dat.readWord();
+            } else if (opcode == 111) {
+                this.resizey = dat.readWord();
+            } else if (opcode == 112) {
+                this.resizez = dat.readWord();
+            } else if (opcode == 113) {
+                this.ambient = dat.readByte();
+            } else if (opcode == 114) {
+                this.contrast = dat.readByte();
+            } else if (opcode == 115) {
+                this.team = dat.readByte();
             } else {
                 console.error('Unknown ObjectType opcode:', opcode);
             }
@@ -598,6 +617,30 @@ export default class ObjectType {
         for (let i = 0; i < this.recol_s.length; ++i) {
             config += `recol${i + 1}s=${this.recol_s[i]}\n`;
             config += `recol${i + 1}d=${this.recol_d[i]}\n`;
+        }
+
+        if (this.resizex != 128) {
+            config += `resizex=${this.resizex}\n`;
+        }
+
+        if (this.resizey != 128) {
+            config += `resizey=${this.resizey}\n`;
+        }
+
+        if (this.resizez != 128) {
+            config += `resizez=${this.resizez}\n`;
+        }
+
+        if (this.ambient != 0) {
+            config += `ambient=${this.ambient}\n`;
+        }
+
+        if (this.contrast != 0) {
+            config += `contrast=${this.contrast}\n`;
+        }
+
+        if (this.team != 0) {
+            config += `team=${this.team}\n`;
         }
 
         return config;

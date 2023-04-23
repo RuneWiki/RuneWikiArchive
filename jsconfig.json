@@ -8,6 +8,9 @@
             "#config/*": [
                 "src/cache/config/*"
             ],
+            "#enum/*": [
+                "src/enum/*"
+            ],
             "#formats/*": [
                 "src/formats/*"
             ],
