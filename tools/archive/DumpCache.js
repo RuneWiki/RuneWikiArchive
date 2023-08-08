@@ -30,10 +30,12 @@ revisions.forEach(rev => {
                 //     file.toFile(`dump/cache/${INDEX_NAMES[index]}/${crc}`);
                 // }
 
+                let version = file.back().seek(-2).readWord();
                 file = file.slice(0, file.length - 2);
                 let crc = ByteBuffer.crc32(file);
                 if (!fs.existsSync(`dump/cache/${INDEX_NAMES[index]}/${crc}`)) {
                     file.toFile(`dump/cache/${INDEX_NAMES[index]}/${crc}`);
+                    console.log(INDEX_NAMES[index], crc, version);
                 }
             }
         }

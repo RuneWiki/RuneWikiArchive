@@ -30,6 +30,7 @@ export class FileStore {
     midis = [];
     rawMaps = [];
     maps = {};
+    locs = 0;
 
     constructor(path, fresh = false) {
         if (fresh) {
@@ -161,6 +162,14 @@ export class FileStore {
             }
         } catch (err) {
             console.log('Failed to unpack map information');
+        }
+
+        try {
+            const config = this.archives[2];
+            const loc_dat = config.read('loc.dat');
+            this.locs = loc_dat.readWord();
+        } catch (err) {
+            console.log('Failed to unpack loc information');
         }
     }
 

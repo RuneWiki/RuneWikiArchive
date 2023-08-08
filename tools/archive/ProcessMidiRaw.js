@@ -10,7 +10,7 @@ if (process.argv.length < 2) {
 const type = 'midis';
 
 function jagexGzip(path) {
-    child_process.execSync(`java -jar data/JagCompress.jar ${path}`);
+    child_process.execSync(`java -jar JagCompress.jar ${path}`);
     let compressed = ByteBuffer.fromFile(path + '.gz');
     fs.unlinkSync(path + '.gz');
     return compressed;

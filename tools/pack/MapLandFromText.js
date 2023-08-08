@@ -1,5 +1,4 @@
 import { ByteBuffer } from '#util/ByteBuffer.js';
-import { compressBz2 } from '#util/Bzip2.js';
 import fs from 'fs';
 
 fs.mkdirSync('data/cache/raw/maps', { recursive: true });
@@ -14,7 +13,7 @@ if (process.argv[2]) {
     fs.readdirSync('data/src/maps').filter(f => f.startsWith('m')).forEach(file => {
         let map = file.replace('.txt', '');
 
-        if (!fs.existsSync(`data/cache/raw/maps/${map}`) || !fs.existsSync(`data/cache/maps/${map}`)) {
+        if (!fs.existsSync(`data/cache/raw/maps/${map}`)) { // || !fs.existsSync(`data/cache/maps/${map}`)) {
             console.log(`Creating ${map}...`);
             let data = encode(map);
             fs.writeFileSync(`data/cache/raw/maps/${map}`, data.raw);

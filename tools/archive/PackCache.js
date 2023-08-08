@@ -10,6 +10,7 @@ const revisions = [
     '298',
     '299',
     '308',
+    '311',
     '317',
     '319',
     '321',
@@ -21,6 +22,7 @@ const revisions = [
     '339',
     '340',
     '345',
+    '350',
     '355',
     '357',
     '358',
@@ -45,8 +47,10 @@ revisions.forEach(rev => {
 
     // fill archives
     for (let i = 1; i <= 8; ++i) {
-        const file = fs.readFileSync(`dump/cache/archives/${i}.${rev}`);
-        cache.write(0, i, file, false);
+        if (fs.existsSync(`dump/cache/archives/${i}.${rev}`)) {
+            const file = fs.readFileSync(`dump/cache/archives/${i}.${rev}`);
+            cache.write(0, i, file, false);
+        }
     }
     cache.parse();
 

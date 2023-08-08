@@ -8,6 +8,7 @@ const revisions = [
     '298',
     '299',
     '308',
+    '311',
     '317',
     '319',
     '321',
@@ -19,6 +20,7 @@ const revisions = [
     '339',
     '340',
     '345',
+    '350',
     '355',
     '357',
     '358',
@@ -175,7 +177,8 @@ function decodeCache(revision) {
     console.log(revision);
 
     let cache = new FileStore(`dump/packed/${revision}`);
-    fs.writeFileSync(`data/src/${revision}.txt`, JSON.stringify(cache.maps, null, 2));
+    fs.writeFileSync(`data/src/${revision}.json`, JSON.stringify({ locs: cache.locs, maps: cache.maps }, null, 2));
+
     Object.keys(cache.maps).forEach(x => {
         Object.keys(cache.maps[x]).forEach(z => {
             let map = cache.maps[x][z];
