@@ -2,7 +2,7 @@ import { ByteBuffer } from '#util/ByteBuffer.js';
 import fs from 'fs';
 
 fs.mkdirSync('data/cache/raw/maps', { recursive: true });
-fs.mkdirSync('data/cache/maps', { recursive: true });
+// fs.mkdirSync('data/cache/maps', { recursive: true });
 
 if (process.argv[2]) {
     let map = process.argv[2];

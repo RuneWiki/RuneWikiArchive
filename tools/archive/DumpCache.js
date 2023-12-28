@@ -35,7 +35,7 @@ revisions.forEach(rev => {
                 let crc = ByteBuffer.crc32(file);
                 if (!fs.existsSync(`dump/cache/${INDEX_NAMES[index]}/${crc}`)) {
                     file.toFile(`dump/cache/${INDEX_NAMES[index]}/${crc}`);
-                    console.log(INDEX_NAMES[index], crc, version);
+                    console.log(INDEX_NAMES[index], entry, 'crc', crc, 'version', version);
                 }
             }
         }

@@ -1,8 +1,4 @@
-import { FileStore } from '#formats/FileStore.js';
 import Jimp from 'jimp';
-import fs from 'fs';
-import { FloorDef } from '#formats/FloorDef.js';
-import { Image } from '#formats/Image.js';
 import { LocDef } from '#formats/LocDef.js';
 
 function fillImage(image, color, x, y, w, h) {
