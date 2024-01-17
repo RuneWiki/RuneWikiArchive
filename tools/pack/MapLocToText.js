@@ -1,11 +1,9 @@
 import { ByteBuffer } from '#util/ByteBuffer.js';
 import fs from 'fs';
 
-// fs.readdirSync('data/cache/raw/maps').filter(f => f.startsWith('l')).forEach(file => {
-//     decode(file);
-// });
-
-decode('l35_75');
+fs.readdirSync('data/cache/raw/maps').filter(f => f.startsWith('l')).forEach(file => {
+    decode(file);
+});
 
 function decode(map) {
     let data = ByteBuffer.fromFile(`data/cache/raw/maps/${map}`);

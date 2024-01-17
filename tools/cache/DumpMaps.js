@@ -19,11 +19,11 @@ Object.keys(cache.maps).forEach(x => {
         let loc = cache.read(4, map.locFile, true);
 
         if (land) {
-            fs.writeFileSync(`dump/maps/m${x}_${z}`, land.raw);
+            fs.writeFileSync(`dump/maps/m${x}_${z}.${map.landVersion}`, land.raw);
         }
 
         if (loc) {
-            fs.writeFileSync(`dump/maps/l${x}_${z}`, loc.raw);
+            fs.writeFileSync(`dump/maps/l${x}_${z}.${map.locVersion}`, loc.raw);
         }
     });
 });

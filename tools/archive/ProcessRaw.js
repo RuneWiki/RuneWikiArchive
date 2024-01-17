@@ -18,6 +18,12 @@ async function jagexGzipAll(paths) {
 let total = 0;
 let count = 0;
 const files = fs.readdirSync('dump/cache/raw').filter(file => !file.endsWith('.gz'));
+for (let i = 0; i < files.length; i++) {
+    if (files[i].indexOf(' ') !== -1) {
+        fs.renameSync(`dump/cache/raw/${files[i]}`, `dump/cache/raw/${files[i].replaceAll(' ', '_')}`);
+        files[i] = files[i].replaceAll(' ', '_');
+    }
+}
 
 await jagexGzipAll(files.map(file => `dump/cache/raw/${file}`));
 

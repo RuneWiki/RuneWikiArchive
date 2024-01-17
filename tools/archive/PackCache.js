@@ -4,6 +4,7 @@ import { verifyCache } from './VerifyCache.js';
 import { ByteBuffer } from '#util/ByteBuffer.js';
 
 const revisions = [
+    '245',
     '254',
     '270',
     '274',
@@ -12,7 +13,7 @@ const revisions = [
     '299',
     '306',
     '308',
-    // '311',
+    '311',
     '317',
     '318',
     '319',
